@@ -1,3 +1,5 @@
+import { button } from "../utils/button"
+
 export const startStage = ( {score} ) => {
   add([
     sprite("title"),   // sprite() component makes it render as a sprite
@@ -10,9 +12,11 @@ export const startStage = ( {score} ) => {
     }),
     pos(12),
   ])
-  
-  onKeyRelease('right', () => {
-    score += 6
+
+  button("Start", 250, 300, () => {
     go('selectLeader', { score })
+  })
+  button("credit", 250, 360, () => {
+    go('credit', { score })
   })
 }
