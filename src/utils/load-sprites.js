@@ -14,3 +14,6 @@ loadSprite('title', 'src/assets/title.png', {
     },
   },
 })
+loadSprite('lalanne', 'src/assets/lalanne.png')
+loadSprite('melanchon', 'src/assets/melanchon.png')
+loadSprite('zemmour', 'src/assets/zemmour.png')

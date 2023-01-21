@@ -11,12 +11,15 @@ import {
   RETRAITE_A_60_ANS,
   SMIC_2000,
   UNIFORME_OBLIGATOIRE,
+  ENERGIE_100_POURCENT_RENOUVELABLE,
+  LEGALISATION_ARMES,
+  TOUT_NUCLAIRE
 } from '../utils/tags'
 
 export const leaders = [
   {
     name: 'Melanchontron',
-    sprite: 'assets/melanchon.png',
+    sprite: 'melanchon',
     accepts: [
       SMIC_2000,
       ISF,
@@ -28,7 +31,7 @@ export const leaders = [
   },
   {
     name: 'Zelourd',
-    sprite: 'assets/zemmour.png',
+    sprite: 'zemmour',
     accepts: [
       IMMIGRATION_ZER0,
       CHASSE_AU_WOKISME,
@@ -41,7 +44,7 @@ export const leaders = [
   },
   {
     name: 'la LAN',
-    sprite: 'assets/lalanne.png',
+    sprite: 'lalanne',
     accepts: [
       ANTIVAX,
       CHASSE_AUX_RONDS_DE_CUIR,

@@ -4,7 +4,7 @@ export const startStage = ({ score }) => {
   const title = add([
     sprite('title'), // sprite() component makes it render as a sprite
     pos(center()), // pos() component gives it position, also enables movement
-    origin('center'), // origin() component defines the pivot point (defaults to "topleft")
+    origin('center'),
   ])
 
   button('Start', 250, 300, () => {
