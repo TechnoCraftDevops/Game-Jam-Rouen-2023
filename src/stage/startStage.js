@@ -7,10 +7,10 @@ export const startStage = ({ score }) => {
     origin('center'),
   ])
 
-  button('Start', 250, 300, () => {
+  button('Start', 300, 300, () => {
     go('selectLeader', { score })
   })
-  button('credit', 250, 360, () => {
+  button('credit', 300, 350, () => {
     go('credit', { score })
   })
 

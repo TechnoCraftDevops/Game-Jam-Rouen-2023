@@ -13,12 +13,12 @@ import {
   UNIFORME_OBLIGATOIRE,
   ENERGIE_100_POURCENT_RENOUVELABLE,
   LEGALISATION_ARMES,
-  TOUT_NUCLAIRE
+  TOUT_NUCLAIRE,
 } from '../utils/tags'
 
 export const leaders = [
   {
-    name: 'Melanchontron',
+    name: 'Melant Chotron',
     sprite: 'melanchon',
     accepts: [
       SMIC_2000,
@@ -27,10 +27,10 @@ export const leaders = [
       RETRAITE_A_60_ANS,
     ],
     rejects: [IMMIGRATION_ZER0, CHASSE_AU_WOKISME, TOUT_NUCLAIRE],
-    color: '#b51212',
+    color: [181, 18, 18],
   },
   {
-    name: 'Zelourd',
+    name: 'Model Z',
     sprite: 'zemmour',
     accepts: [
       IMMIGRATION_ZER0,
@@ -40,10 +40,10 @@ export const leaders = [
       TOUT_NUCLAIRE,
     ],
     rejects: [SMIC_2000, MARIAGE_POUR_TOUS],
-    color: '#4145b5',
+    color: [65, 69, 181],
   },
   {
-    name: 'la LAN',
+    name: 'La LAN',
     sprite: 'lalanne',
     accepts: [
       ANTIVAX,
@@ -52,6 +52,6 @@ export const leaders = [
       PRIX_DE_L_ESSENCE,
     ],
     rejects: [CONTROLE_POPULATION, LEGALISATION_ARMES],
-    color: '#ada809',
+    color: [173, 168, 9],
   },
 ]
