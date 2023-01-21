@@ -1,7 +1,4 @@
-
-
 export const startStage = ( {score} ) => {
-  
   add([
     sprite("title"),   // sprite() component makes it render as a sprite
     pos(center()),     // pos() component gives it position, also enables movement
