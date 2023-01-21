@@ -7,13 +7,11 @@ import {
   LEGALISATION_CANNABIS,
   PRIX_DE_L_ESSENCE,
   SMIC_2000,
-  ISF,
-  TOUT_NUCLAIRE,
 } from '../utils/tags'
 
 export const groups = [
   {
-    name: 'Gilets jaunes',
+    name: 'gilets jaunes',
     sprite: 'group_base',
     force: 1,
     popularityCost: 8,
@@ -22,7 +20,7 @@ export const groups = [
     color: [181, 18, 18],
   },
   {
-    name: 'Patriotes',
+    name: 'patriotes',
     sprite: 'group_base',
     force: 1,
     popularityCost: 8,
@@ -36,7 +34,7 @@ export const groups = [
     color: [65, 69, 181],
   },
   {
-    name: 'Etudiants en sociologie',
+    name: 'étudiants en sociologie',
     sprite: 'group_base',
     force: 1,
     popularityCost: 8,
