@@ -17,13 +17,7 @@ export const groups = [
     force: 1,
     cost: 8,
     minPopularity: 0,
-    accepts: [
-      SMIC_2000,
-      ISF,
-      ENERGIE_100_POURCENT_RENOUVELABLE,
-      CHASSE_AUX_RONDS_DE_CUIR,
-      PRIX_DE_L_ESSENCE,
-    ],
+    accepts: [SMIC_2000, ISF, CHASSE_AUX_RONDS_DE_CUIR, PRIX_DE_L_ESSENCE],
     rejects: [TOUT_NUCLAIRE],
     color: '#b51212',
   },
@@ -36,7 +30,6 @@ export const groups = [
     accepts: [
       IMMIGRATION_ZER0,
       CHASSE_AU_WOKISME,
-      UNIFORME_OBLIGATOIRE,
       CONTROLE_POPULATION,
       LEGALISATION_ARMES,
     ],

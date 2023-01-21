@@ -10,7 +10,7 @@ export const startStage = ({ score }) => {
   button('Start', 300, 300, () => {
     go('selectLeader', { score })
   })
-  button('credit', 300, 350, () => {
+  button('credits', 300, 350, () => {
     go('credit', { score })
   })
 
