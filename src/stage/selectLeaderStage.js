@@ -1,14 +1,9 @@
 import { leaders } from '../figure/leaders'
 import { button } from '../utils/button'
-import { HEIGHT, WIDTH } from '../utils/k'
 
 var x = 0
 
-export const selectLeaderStage = ({ score }) => {
-  //ACTIONS
-  const chooseLeader = () => {
-    go('selectGroup', { score, leader: leaders[x] })
-  }
+export const selectLeaderStage = ( props ) => {
 
   //background
   add([
@@ -39,12 +34,10 @@ export const selectLeaderStage = ({ score }) => {
     area({ cursor: 'pointer' }),
   ])
 
-  leader.onClick(chooseLeader)
-
   // forward button
   button('>', width() - 50, height() / 2, () => {
     x >= leaders.length - 1 ? (x = 0) : (x += 1)
-    go('selectLeader', { score, leader: leaders[x] })
+    go('selectLeader', { ...props, leader: leaders[x] })
   })
   // leader name
   const leaderName = add([
@@ -78,6 +71,11 @@ export const selectLeaderStage = ({ score }) => {
       pos(250, 250 + index * 20),
     ])
   })
-
+  //ACTIONS
+  const chooseLeader = () => {
+    go('selectGroup', { ...props, leader: leaders[x]})
+  }
+  
+  leader.onClick(chooseLeader)
   leaderName.onClick(chooseLeader)
 }

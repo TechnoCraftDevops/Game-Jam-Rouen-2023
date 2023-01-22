@@ -10,6 +10,9 @@ import { selectGroupStage } from './src/stage/selectGroupStage'
 import { fightStage } from './src/stage/fightStage.js'
 import { creditStage } from './src/stage/creditStage'
 
+const props ={
+  popularity: 9,
+}
 scene('start', startStage)
 scene('selectLeader', selectLeaderStage)
 scene('selectGroup', selectGroupStage)
@@ -18,7 +21,7 @@ scene('credit', creditStage)
 
 function start() {
   go('start', {
-    score: 0,
+    props,
   })
 }
 start()
