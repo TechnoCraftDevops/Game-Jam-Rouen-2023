@@ -11,7 +11,7 @@ import { fightStage } from './src/stage/fightStage.js'
 import { creditStage } from './src/stage/creditStage'
 import { selectTargetStage } from './src/stage/selectTargetStage'
 
-const props ={
+const props = {
   popularity: 9,
 }
 scene('start', startStage)
@@ -24,6 +24,7 @@ scene('credit', creditStage)
 function start() {
   go('start', {
     props,
+    poplarity: 9,
   })
 }
 start()

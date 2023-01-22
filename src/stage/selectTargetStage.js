@@ -1,6 +1,6 @@
 import { targets } from '../figure/targets'
 
-export const selectTargetStage = ({ score, groups }) => {
+export const selectTargetStage = ({ score, groups, leader }) => {
   //BG
   add([rect(width(), height()), pos(0, 0), color(156, 134, 101)])
 
@@ -31,16 +31,14 @@ export const selectTargetStage = ({ score, groups }) => {
 
     target.foes.forEach((foe, idx) => {
       add([
-        text(`${foe.number[0]}~${foe.number.at(-1)} ${foe.name}`, {
-          size: 20,
-        }),
-        pos(140, y + 5 + 22 * idx),
+        text(`${foe.number[0]}~${foe.number.at(-1)} ${foe.name}`, {}),
+        pos(140, y + 5 + 12 * idx),
         origin('left', 'top'),
       ])
     })
 
     targetRect.onClick(() => {
-      go('selectFight', { target, score, groups })
+      go('selectFight', { target, score, groups, leader })
     })
   })
 }

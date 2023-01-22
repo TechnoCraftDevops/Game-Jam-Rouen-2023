@@ -3,10 +3,12 @@ import {
   CHASSE_AU_WOKISME,
   CONTROLE_POPULATION,
   IMMIGRATION_ZER0,
+  ISF,
   LEGALISATION_ARMES,
   LEGALISATION_CANNABIS,
   PRIX_DE_L_ESSENCE,
   SMIC_2000,
+  TOUT_NUCLAIRE,
 } from '../utils/tags'
 
 export const groups = [
