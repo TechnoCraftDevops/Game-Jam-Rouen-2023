@@ -3,8 +3,7 @@ import { button } from '../utils/button'
 
 var x = 0
 
-export const selectLeaderStage = ( props ) => {
-
+export const selectLeaderStage = (props) => {
   //background
   add([
     rect(width(), height()),
@@ -73,7 +72,7 @@ export const selectLeaderStage = ( props ) => {
   })
   //ACTIONS
   const chooseLeader = () => {
-    go('selectGroup', { ...props, leader: leaders[x], myGroup: []})
+    go('selectGroup', { ...props, leader: leaders[x], myGroups: [] })
   }
 
   leader.onClick(chooseLeader)

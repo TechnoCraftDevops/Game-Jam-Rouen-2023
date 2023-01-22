@@ -9,7 +9,17 @@ loadSprite('melanchon', 'src/assets/melanchon.png')
 loadSprite('zemmour', 'src/assets/zemmour.png')
 loadSprite('group_base', 'src/assets/group_base.png')
 loadSprite('batiment', 'src/assets/batiment.png')
-loadSprite('mairie', 'src/assets/mairie.png')
+loadSprite('mairie', 'src/assets/mairie.png', {
+  sliceX: 6,
+  anims: {
+    destruct: {
+      from: 0,
+      to: 5,
+      speed: 10,
+      loop: false,
+    },
+  },
+})
 loadSprite('title', 'src/assets/title.png', {
   sliceX: 8,
   anims: {

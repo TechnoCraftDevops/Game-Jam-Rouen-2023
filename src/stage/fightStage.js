@@ -1,22 +1,10 @@
+import { DEFAULT_POPULARITY } from '../../main'
 import { foes } from '../figure/foes'
-import { groups } from '../figure/groups'
+import { targets } from '../figure/targets'
 import { getRandomInt } from '../utils/getRandomInt'
 
-const leader = leaders[0]
-const myGroups = [
-  {
-    name: 'patriotes',
-    number: 10,
-  },
-  {
-    name: 'gilets jaunes',
-    number: 5,
-  },
-]
-
-const target = targets[0]
-
-export const fightStage = ({ popularity }) => {
+export const fightStage = (props) => {
+  const { target, myGroups, leader } = props
   //DECORS --------------------
   //BG
   add([rect(width(), height()), pos(0, 0), color(83, 82, 140)])
@@ -41,11 +29,11 @@ export const fightStage = ({ popularity }) => {
 
   const Y = height() - 72
   target.foes.forEach((foe) => {
-    const foeObj = foes.find((foe) => foe.name === foe.name)
+    const foeObj = foes.find((fo) => fo.name === foe.name)
 
     Array.from(
       Array(getRandomInt(foe.number.at(0), foe.number.at(-1))).keys()
-    ).forEach((unit) => {
+    ).forEach(() => {
       const x = getRandomInt(width() - 100, width() - width() / 3)
 
       const foeSprite = add([
@@ -64,24 +52,22 @@ export const fightStage = ({ popularity }) => {
       foeSprite.onCollide('group', (unitGroup) => {
         foeSprite.hurt(unitGroup.force)
         unitGroup.hurt(foeSprite.force)
-        popularity = +foeSprite.force
+        props.popularity += foeSprite.force
       })
     })
   })
 
   myGroups.forEach((supporter) => {
-    const supporterObj = groups.find((group) => group.name === supporter.name)
-
-    const bonus = supporterObj.accepts.reduce((acc, accept) => {
+    const bonus = supporter.accepts.reduce((acc, accept) => {
       const exist = leader.accepts.includes(accept)
-      if (exist) acc += 0.3
+      if (exist) acc += 0.5
 
       return acc
     }, 1)
 
-    const malus = supporterObj.rejects.reduce((acc, reject) => {
+    const malus = supporter.rejects.reduce((acc, reject) => {
       const exist = leader.rejects.includes(reject)
-      if (exist) acc -= 0.5
+      if (exist) acc -= 1
 
       return acc
     }, 0)
@@ -100,10 +86,10 @@ export const fightStage = ({ popularity }) => {
         solid(),
         body(),
 
-        health(supporterObj.force),
+        health(supporter.force),
         'group',
         'character',
-        { force: supporterObj.force * muter },
+        { force: supporter.force * muter },
       ])
 
       supporterSprite.play('run')
@@ -128,6 +114,16 @@ export const fightStage = ({ popularity }) => {
 
     explode.play('idle')
     destroy(e)
+
+    const numberOfSurvivor = get('group').length
+
+    if (numberOfSurvivor <= 0) {
+      props.popularity -= Math.round(props.popularity / 4)
+      if (props.popularity < DEFAULT_POPULARITY)
+        props.popularity = DEFAULT_POPULARITY
+
+      go('selectGroup', { ...props, myGroups: [] })
+    }
   })
 
   //objectif
@@ -137,9 +133,23 @@ export const fightStage = ({ popularity }) => {
     area(),
   ])
 
-  objectif.onCollide('group', () => {
-    // AJOUTER DE LA POPULARITE de base
-    if (popularity < 20) popularity = 20
-    go('selectGroup', { popularity, leader })
+  objectif.onCollide('group', (unit) => {
+    const index = targets.findIndex((t) => t.name === target.name)
+    if (index >= props.unlockTarget) {
+      objectif.play('destruct')
+      props.unlockTarget++
+    }
+
+    if (props.popularity < DEFAULT_POPULARITY)
+      props.popularity = DEFAULT_POPULARITY
+
+    destroy(unit)
+    wait(2, () => {
+      go('selectGroup', {
+        ...props,
+        unlockTarget: props.unlockTarget,
+        myGroups: [],
+      })
+    })
   })
 }

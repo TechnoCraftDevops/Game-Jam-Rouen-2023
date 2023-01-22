@@ -1,10 +1,13 @@
 import { targets } from '../figure/targets'
 
-export const selectTargetStage = ({ score, groups, leader }) => {
+export const selectTargetStage = (props) => {
   //BG
   add([rect(width(), height()), pos(0, 0), color(156, 134, 101)])
 
   targets.forEach((target, index) => {
+    const isDisabled = index > props.unlockTarget
+    const disabled = () => opacity(isDisabled ? 0.3 : 1)
+
     const x = width() / 2
     const y = 70 + 100 * index
     const targetRect = add([
@@ -18,7 +21,7 @@ export const selectTargetStage = ({ score, groups, leader }) => {
     ])
 
     //thumbnail
-    add([sprite(target.sprite), pos(60, y - 30)])
+    add([sprite(target.sprite), pos(60, y - 30), disabled()])
 
     //name
     add([
@@ -27,6 +30,7 @@ export const selectTargetStage = ({ score, groups, leader }) => {
       }),
       pos(140, y - 20),
       origin('left', 'top'),
+      disabled(),
     ])
 
     target.foes.forEach((foe, idx) => {
@@ -34,11 +38,13 @@ export const selectTargetStage = ({ score, groups, leader }) => {
         text(`${foe.number[0]}~${foe.number.at(-1)} ${foe.name}`, {}),
         pos(140, y + 5 + 12 * idx),
         origin('left', 'top'),
+        disabled(),
       ])
     })
 
     targetRect.onClick(() => {
-      go('selectFight', { target, score, groups, leader })
+      if (isDisabled) return
+      go('selectFight', { ...props, target })
     })
   })
 }

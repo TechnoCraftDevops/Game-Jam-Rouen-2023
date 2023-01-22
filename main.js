@@ -21,10 +21,13 @@ scene('selectTarget', selectTargetStage)
 scene('selectFight', fightStage)
 scene('credit', creditStage)
 
+export const DEFAULT_POPULARITY = 20
+
 function start() {
   go('start', {
     props,
-    poplarity: 9,
+    popularity: DEFAULT_POPULARITY,
+    unlockTarget: 0,
   })
 }
 start()
