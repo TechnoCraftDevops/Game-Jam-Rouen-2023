@@ -2,7 +2,7 @@ export const button = (txt, posx, posy, func) => {
   const btn = add([
     text(txt, {
       font: 'sinko',
-      size: 30,
+      size: 20,
     }),
     pos(posx, posy),
     area({ cursor: 'pointer' }),

@@ -73,9 +73,9 @@ export const selectLeaderStage = ( props ) => {
   })
   //ACTIONS
   const chooseLeader = () => {
-    go('selectGroup', { ...props, leader: leaders[x]})
+    go('selectGroup', { ...props, leader: leaders[x], myGroup: []})
   }
-  
+
   leader.onClick(chooseLeader)
   leaderName.onClick(chooseLeader)
 }
