@@ -20,6 +20,17 @@ loadSprite('mairie', 'src/assets/mairie.png', {
     },
   },
 })
+loadSprite('prefecture', 'src/assets/prefecture.png', {
+  sliceX: 9,
+  anims: {
+    destruct: {
+      from: 0,
+      to: 8,
+      speed: 10,
+      loop: false,
+    },
+  },
+})
 loadSprite('title', 'src/assets/title.png', {
   sliceX: 8,
   anims: {

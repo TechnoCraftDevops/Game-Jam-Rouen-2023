@@ -14,12 +14,12 @@ export const selectLeaderStage = (props) => {
   ])
   // text
   add([
-    text(`Choose your Leader`, {
+    text(`Choisis ton champion`, {
       width: width(),
       font: 'sinko',
-      size: 50,
+      size: 45,
     }),
-    pos(40, 20),
+    pos(35, 20),
   ])
   // back button
   button('<', 30, height() / 2, () => {

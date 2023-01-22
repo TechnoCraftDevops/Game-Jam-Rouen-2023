@@ -3,6 +3,8 @@ import { alertMessage } from '../utils/alertMessage'
 import { button } from '../utils/button'
 import { getRandomInt } from '../utils/getRandomInt'
 
+export const DEFAULT_GENERATE_COUNT = 3
+
 export const selectGroupStage = (props) => {
   //background
   add([
@@ -20,6 +22,16 @@ export const selectGroupStage = (props) => {
     }),
     pos(20),
     origin('left', 'top'),
+  ])
+
+  const manifestants = props.myGroups.reduce((acc, group) => {
+    return acc + group.number
+  }, 0)
+
+  add([
+    text(`Manifestant${manifestants ? 's' : ''}: ${manifestants}`),
+    origin('right', 'top'),
+    pos(width() - 30, 20),
   ])
 
   const randomGroups = groups.sort(() => Math.random() - 0.5).slice(0, 3)
@@ -91,9 +103,12 @@ export const selectGroupStage = (props) => {
     })
   })
 
-  button('generer', 40, height() - 40, () => {
-    go('selectGroup', props)
-  })
+  if (props.generateCount > 0) {
+    button(`generer (${props.generateCount})`, 40, height() - 40, () => {
+      go('selectGroup', props)
+      props.generateCount--
+    })
+  }
 
   button('Commencer la revolution', 400, height() - 40, () => {
     if (props.myGroups.length === 0) return

@@ -2,6 +2,7 @@ import { DEFAULT_POPULARITY } from '../../main'
 import { foes } from '../figure/foes'
 import { targets } from '../figure/targets'
 import { getRandomInt } from '../utils/getRandomInt'
+import { DEFAULT_GENERATE_COUNT } from './selectGroupStage'
 
 export const fightStage = (props) => {
   const { target, myGroups, leader } = props
@@ -24,6 +25,24 @@ export const fightStage = (props) => {
     solid(),
     color(0, 0, 0),
   ])
+
+  const stopButton = add([
+    text(`Arretez le massacre`),
+    origin('right', 'top'),
+    pos(width() - 30, 20),
+    area({ cursor: 'pointer' }),
+  ])
+
+  stopButton.onClick(() => {
+    if (props.popularity < DEFAULT_POPULARITY)
+      props.popularity = DEFAULT_POPULARITY
+
+    go('selectGroup', {
+      ...props,
+      myGroups: [],
+      generateCount: DEFAULT_GENERATE_COUNT,
+    })
+  })
 
   //PERSONNAGES --------------------
 
@@ -115,15 +134,21 @@ export const fightStage = (props) => {
     explode.play('idle')
     destroy(e)
 
-    const numberOfSurvivor = get('group').length
+    wait(2, () => {
+      const numberOfSurvivor = get('group').length
 
-    if (numberOfSurvivor <= 0) {
-      props.popularity -= Math.round(props.popularity / 4)
-      if (props.popularity < DEFAULT_POPULARITY)
-        props.popularity = DEFAULT_POPULARITY
+      if (numberOfSurvivor <= 0) {
+        props.popularity -= Math.round(props.popularity / 4)
+        if (props.popularity < DEFAULT_POPULARITY)
+          props.popularity = DEFAULT_POPULARITY
 
-      go('selectGroup', { ...props, myGroups: [] })
-    }
+        go('selectGroup', {
+          ...props,
+          myGroups: [],
+          generateCount: DEFAULT_GENERATE_COUNT,
+        })
+      }
+    })
   })
 
   //objectif
@@ -149,6 +174,7 @@ export const fightStage = (props) => {
         ...props,
         unlockTarget: props.unlockTarget,
         myGroups: [],
+        generateCount: DEFAULT_GENERATE_COUNT,
       })
     })
   })

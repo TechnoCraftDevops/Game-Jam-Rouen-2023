@@ -7,7 +7,7 @@ export const startStage = (props) => {
     origin('center'),
   ])
 
-  button('Start', 300, 300, () => {
+  button('Commencer', 300, 300, () => {
     go('selectLeader', props)
   })
   button('credits', 300, 350, () => {

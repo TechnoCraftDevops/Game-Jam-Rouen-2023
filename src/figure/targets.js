@@ -11,7 +11,7 @@ export const targets = [
   },
   {
     name: 'Prefecture',
-    sprite: 'batiment',
+    sprite: 'prefecture',
     foes: [
       {
         name: 'Police municipale',

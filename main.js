@@ -6,7 +6,10 @@ import './src/utils/load-sprites.js'
  */
 import { startStage } from './src/stage/startStage.js'
 import { selectLeaderStage } from './src/stage/selectLeaderStage.js'
-import { selectGroupStage } from './src/stage/selectGroupStage'
+import {
+  DEFAULT_GENERATE_COUNT,
+  selectGroupStage,
+} from './src/stage/selectGroupStage'
 import { fightStage } from './src/stage/fightStage.js'
 import { creditStage } from './src/stage/creditStage'
 import { selectTargetStage } from './src/stage/selectTargetStage'
@@ -28,6 +31,7 @@ function start() {
     props,
     popularity: DEFAULT_POPULARITY,
     unlockTarget: 0,
+    generateCount: DEFAULT_GENERATE_COUNT,
   })
 }
 start()
