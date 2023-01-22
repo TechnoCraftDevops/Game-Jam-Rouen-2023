@@ -96,10 +96,8 @@ export const selectGroupStage = (props) => {
   })
 
   button('Commencer la revolution', 400, height() - 40, () => {
-    go('selectTarget', props)
-  })
+    if (props.myGroups.length === 0) return
 
-  onKeyRelease('right', () => {
     go('selectTarget', props)
   })
 }
