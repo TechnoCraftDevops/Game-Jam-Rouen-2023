@@ -1,6 +1,7 @@
 import { button } from '../utils/button'
 
-export const startStage = ({ score }) => {
+export const startStage = ({ props }) => {
+
   const title = add([
     sprite('title'), // sprite() component makes it render as a sprite
     pos(center()), // pos() component gives it position, also enables movement
@@ -8,10 +9,10 @@ export const startStage = ({ score }) => {
   ])
 
   button('Start', 300, 300, () => {
-    go('selectLeader', { score })
+    go('selectLeader', { props })
   })
-  button('credit', 300, 350, () => {
-    go('credit', { score })
+  button('credits', 300, 350, () => {
+    go('credit', { props })
   })
 
   title.play('idle')

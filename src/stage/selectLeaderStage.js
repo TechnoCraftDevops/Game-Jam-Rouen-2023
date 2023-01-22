@@ -1,11 +1,11 @@
 import { leaders } from '../figure/leaders'
 import { button } from '../utils/button'
-import { HEIGHT, WIDTH } from '../utils/k'
 
 var x = 0
 
-export const selectLeaderStage = ({ score, leader }) => {
-  console.log(leaders[x].color)
+export const selectLeaderStage = ( props ) => {
+
+  //background
   add([
     rect(width(), height()),
     pos(0, 0),
@@ -23,31 +23,37 @@ export const selectLeaderStage = ({ score, leader }) => {
     pos(40, 20),
   ])
   // back button
-  button('<', 50, 250, () => {
+  button('<', 30, height() / 2, () => {
     x <= 0 ? (x = leaders.length - 1) : (x -= 1)
     go('selectLeader', { score, leader: leaders[x] })
   })
   // leader sprite
-  add([sprite(leaders[x].sprite), pos(150, 250), origin('center')])
+  const leader = add([
+    sprite(leaders[x].sprite),
+    pos(50, 130),
+    area({ cursor: 'pointer' }),
+  ])
+
   // forward button
-  button('>', 200, 250, () => {
+  button('>', width() - 50, height() / 2, () => {
     x >= leaders.length - 1 ? (x = 0) : (x += 1)
-    go('selectLeader', { score, leader: leaders[x] })
+    go('selectLeader', { ...props, leader: leaders[x] })
   })
   // leader name
-  add([
+  const leaderName = add([
     text(leaders[x].name, {
       width: width(),
       size: 30,
     }),
-    pos(30, 400),
-    origin('left'),
+    pos(width() / 2, height() - 50),
+    origin('center'),
+    area({ cursor: 'pointer' }),
   ])
 
   // accept & reject
   leaders[x].accepts.forEach((accept, index) => {
     add([
-      text(accept, {
+      text('+ ' + accept, {
         width: width(),
         size: 20,
       }),
@@ -58,19 +64,18 @@ export const selectLeaderStage = ({ score, leader }) => {
   // accept & reject
   leaders[x].rejects.forEach((reject, index) => {
     add([
-      text(reject, {
+      text('- ' + reject, {
         width: width(),
         size: 20,
       }),
       pos(250, 250 + index * 20),
     ])
   })
+  //ACTIONS
+  const chooseLeader = () => {
+    go('selectGroup', { ...props, leader: leaders[x], myGroup: []})
+  }
 
-  /**
-   * Action
-   */
-  onKeyRelease('right', () => {
-    score += 6
-    go('selectGroup', { score })
-  })
+  leader.onClick(chooseLeader)
+  leaderName.onClick(chooseLeader)
 }
