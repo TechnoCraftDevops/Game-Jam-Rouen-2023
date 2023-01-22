@@ -1,11 +1,11 @@
 export const targets = [
   {
     name: 'Mairie',
-    sprite: 'batiment',
+    sprite: 'mairie',
     foes: [
       {
         name: 'Police municipale',
-        number: [1, 3],
+        number: [5, 15],
       },
     ],
   },
@@ -15,11 +15,11 @@ export const targets = [
     foes: [
       {
         name: 'Police municipale',
-        number: [1, 5],
+        number: [5, 20],
       },
       {
         name: 'Police nationale',
-        number: [1, 2],
+        number: [10, 20],
       },
     ],
   },
@@ -29,11 +29,11 @@ export const targets = [
     foes: [
       {
         name: 'Police nationale',
-        number: [1, 5],
+        number: [30, 50],
       },
       {
         name: 'CRS',
-        number: [5, 10],
+        number: [10, 100],
       },
     ],
   },

@@ -2,16 +2,14 @@ export const foes = [
   {
     name: 'Police municipale',
     sprite: 'assets/group_base.png',
-    force: 1,
-    latency: 5,
+    force: 2,
     //TODO sprites armes
     weapons: 'assets/group_base.png',
   },
   {
     name: 'Police nationale',
     sprite: 'assets/group_base.png',
-    force: 2,
-    latency: 5,
+    force: 5,
     //TODO sprites armes
     weapons: 'assets/group_base.png',
   },
@@ -19,8 +17,7 @@ export const foes = [
   {
     name: 'CRS',
     sprite: 'assets/group_base.png',
-    force: 5,
-    latency: 10,
+    force: 10,
     //TODO sprites armes
     weapons: 'assets/group_base.png',
   },
