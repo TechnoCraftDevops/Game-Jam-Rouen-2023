@@ -3,8 +3,7 @@ import { button } from '../utils/button'
 
 var x = 0
 
-export const selectLeaderStage = ( props ) => {
-
+export const selectLeaderStage = (props) => {
   //background
   add([
     rect(width(), height()),
@@ -15,17 +14,17 @@ export const selectLeaderStage = ( props ) => {
   ])
   // text
   add([
-    text(`Choose your Leader`, {
+    text(`Choisis ton champion`, {
       width: width(),
       font: 'sinko',
-      size: 50,
+      size: 45,
     }),
-    pos(40, 20),
+    pos(35, 20),
   ])
   // back button
   button('<', 30, height() / 2, () => {
     x <= 0 ? (x = leaders.length - 1) : (x -= 1)
-    go('selectLeader', { score, leader: leaders[x] })
+    go('selectLeader', { ...props, leader: leaders[x] })
   })
   // leader sprite
   const leader = add([
@@ -73,7 +72,7 @@ export const selectLeaderStage = ( props ) => {
   })
   //ACTIONS
   const chooseLeader = () => {
-    go('selectGroup', { ...props, leader: leaders[x], myGroup: []})
+    go('selectGroup', { ...props, leader: leaders[x], myGroups: [] })
   }
 
   leader.onClick(chooseLeader)
