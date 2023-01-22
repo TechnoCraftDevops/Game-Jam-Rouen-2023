@@ -24,7 +24,7 @@ export const selectLeaderStage = (props) => {
   // back button
   button('<', 30, height() / 2, () => {
     x <= 0 ? (x = leaders.length - 1) : (x -= 1)
-    go('selectLeader', { score, leader: leaders[x] })
+    go('selectLeader', { ...props, leader: leaders[x] })
   })
   // leader sprite
   const leader = add([
