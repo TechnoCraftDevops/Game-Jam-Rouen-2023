@@ -1,9 +1,8 @@
-import { groups } from '../figure/groups'
+import { groups } from '../figures/groups'
 import { alertMessage } from '../utils/alertMessage'
 import { button } from '../utils/button'
 import { getRandomInt } from '../utils/getRandomInt'
-
-export const DEFAULT_GENERATE_COUNT = 3
+import { STAGES } from '../../main'
 
 export const selectGroupStage = (props) => {
   //background
@@ -24,7 +23,7 @@ export const selectGroupStage = (props) => {
     origin('left', 'top'),
   ])
 
-  const manifestants = props.myGroups.reduce((acc, group) => {
+  const manifestants = props.groups.reduce((acc, group) => {
     return acc + group.number
   }, 0)
 
@@ -34,11 +33,11 @@ export const selectGroupStage = (props) => {
     pos(width() - 30, 20),
   ])
 
+  //display 3 random groups
   const randomGroups = groups.sort(() => Math.random() - 0.5).slice(0, 3)
 
   randomGroups.forEach((group, index) => {
     const numOfPeople = getRandomInt(1, props.popularity / 2)
-
     const cost = group.popularityCost * numOfPeople
 
     const acceptStr = group.accepts.map((str) => `+ ${str}`)
@@ -62,7 +61,8 @@ export const selectGroupStage = (props) => {
       outline(2, color(0, 0, 0)),
       area({ cursor: 'pointer' }),
     ])
-    // group sprit
+
+    // group sprites
     add([
       text(group.name.toUpperCase()),
       pos(x, 70),
@@ -95,8 +95,8 @@ export const selectGroupStage = (props) => {
 
       if (playerPopularity >= cost) {
         props.popularity -= cost
-        props.myGroups.push({ ...group, number: numOfPeople })
-        go('selectGroup', props)
+        props.groups.push({ ...group, number: numOfPeople })
+        go(STAGES.selectGroups, props)
       } else {
         alertMessage('popularite insuffisante')
       }
@@ -105,14 +105,14 @@ export const selectGroupStage = (props) => {
 
   if (props.generateCount > 0) {
     button(`generer (${props.generateCount})`, 40, height() - 40, () => {
-      go('selectGroup', props)
+      go(STAGES.selectGroups, props)
       props.generateCount--
     })
   }
 
   button('Commencer la revolution', 400, height() - 40, () => {
-    if (props.myGroups.length === 0) return
+    if (props.groups.length === 0) return
 
-    go('selectTarget', props)
+    go(STAGES.selectTarget, props)
   })
 }

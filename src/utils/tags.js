@@ -1,15 +1,23 @@
-export const SMIC_2000 = 'Smic a 2000€'
-export const RETRAITE_A_60_ANS = 'Retraite a 60 ans'
-export const ENERGIE_100_POURCENT_RENOUVELABLE = 'Energie 100% renouvelable'
-export const TOUT_NUCLAIRE = 'Tout nucleaire'
-export const IMMIGRATION_ZER0 = 'Immigration zero'
-export const CHASSE_AU_WOKISME = 'Chasse au wokisme'
-export const UNIFORME_OBLIGATOIRE = 'Uniforme obligatoire'
-export const PRIX_DE_L_ESSENCE = 'Prix de l essence'
-export const CHASSE_AUX_RONDS_DE_CUIR = 'Chasse aux ronds de cuir'
-export const LEGALISATION_ARMES = 'Legalisation des armes'
-export const LEGALISATION_CANNABIS = 'Legalisation du cannabis'
-export const ANTIVAX = 'Anti-vax'
-export const CONTROLE_POPULATION = 'Controle de la population'
-export const ISF = "retour de l 'ISF"
-export const MARIAGE_POUR_TOUS = 'Mariage pour tous'
+export const TAGS = {
+  smic2000: 'Smic a 2000€',
+  retraiteA60Ans: 'Retraite a 60 ans',
+  energie100PourcentRenouvelable: 'Energie 100% renouvelable',
+  toutNucleaire: 'Tout nucleaire',
+  immigrationZero: 'Immigration zero',
+  chasseAuWokisme: 'Chasse au wokisme',
+  uniformeObligatoire: 'Uniforme obligatoire',
+  prixDeLEssence: 'Prix de l essence',
+  chasseAuxRondsDeCuir: 'Chasse aux ronds de cuir',
+  legalisationArmes: 'Legalisation des armes',
+  legalisationCannabis: 'Legalisation du cannabis',
+  antivax: 'Anti-vax',
+  controlePopulation: 'Controle de la population',
+  isf: "retour de l 'ISF",
+  mariagePourTous: 'Mariage pour tous',
+}
+
+export const groupTags = {
+  group: 'group',
+  orderForce: 'orderForce',
+  person: 'person',
+}

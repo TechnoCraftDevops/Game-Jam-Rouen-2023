@@ -1,37 +1,46 @@
 import './style.css'
 import './src/utils/k.js'
 import './src/utils/load-sprites.js'
-/**
- * Stages
- */
-import { startStage } from './src/stage/startStage.js'
-import { selectLeaderStage } from './src/stage/selectLeaderStage.js'
-import {
-  DEFAULT_GENERATE_COUNT,
-  selectGroupStage,
-} from './src/stage/selectGroupStage'
-import { fightStage } from './src/stage/fightStage.js'
-import { creditStage } from './src/stage/creditStage'
-import { selectTargetStage } from './src/stage/selectTargetStage'
+import { startStage } from './src/stages/start.stage'
+import { selectGroupStage } from './src/stages/select-groups.stage'
+import { selectTargetStage } from './src/stages/select-target.stage'
+import { selectLeaderStage } from './src/stages/select-leader.stage'
+import { creditsStage } from './src/stages/credits.stage'
+import { fightStage } from './src/stages/fight.stage'
 
-const props = {
-  popularity: 9,
+export const gameInitialState = {
+  popularity: 20,
+  generateCount: 3,
+  unlockTarget: 0,
 }
-scene('start', startStage)
-scene('selectLeader', selectLeaderStage)
-scene('selectGroup', selectGroupStage)
-scene('selectTarget', selectTargetStage)
-scene('selectFight', fightStage)
-scene('credit', creditStage)
 
-export const DEFAULT_POPULARITY = 20
+export const gameState = {
+  popularity: gameInitialState.popularity,
+  generateCount: gameInitialState.generateCount,
+  unlockTarget: gameInitialState.unlockTarget,
+  leader: undefined,
+  groups: [],
+  target: undefined,
+}
+
+export const STAGES = {
+  start: 'start',
+  selectGroups: 'selectGroups',
+  selectTarget: 'selectTarget',
+  selectLeader: 'selectLeader',
+  credits: 'credits',
+  fight: 'fight',
+}
+
+scene(STAGES.start, (props) => startStage(props))
+scene(STAGES.selectGroups, (props) => selectGroupStage(props))
+scene(STAGES.selectTarget, (props) => selectTargetStage(props))
+scene(STAGES.selectLeader, (props) => selectLeaderStage(props))
+scene(STAGES.credits, (props) => creditsStage(props))
+scene(STAGES.fight, (props) => fightStage(props))
 
 function start() {
-  go('start', {
-    props,
-    popularity: DEFAULT_POPULARITY,
-    unlockTarget: 0,
-    generateCount: DEFAULT_GENERATE_COUNT,
-  })
+  go(STAGES.start, gameState)
 }
+
 start()

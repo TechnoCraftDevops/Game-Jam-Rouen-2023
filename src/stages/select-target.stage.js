@@ -1,4 +1,5 @@
-import { targets } from '../figure/targets'
+import { targets } from '../figures/targets'
+import { STAGES } from '../../main'
 
 export const selectTargetStage = (props) => {
   //BG
@@ -44,7 +45,7 @@ export const selectTargetStage = (props) => {
 
     targetRect.onClick(() => {
       if (isDisabled) return
-      go('selectFight', { ...props, target })
+      go(STAGES.fight, { ...props, target })
     })
   })
 }
