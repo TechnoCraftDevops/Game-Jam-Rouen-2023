@@ -1,11 +1,13 @@
-import { DEFAULT_POPULARITY } from '../../main'
-import { foes } from '../figure/foes'
-import { targets } from '../figure/targets'
+import { gameInitialState } from '../../main'
+import { foes } from '../figures/foes'
+import { targets } from '../figures/targets'
 import { getRandomInt } from '../utils/getRandomInt'
-import { DEFAULT_GENERATE_COUNT } from './selectGroupStage'
+import { STAGES } from '../../main'
+import { groupTags } from '../utils/tags'
+import { SPRITES } from '../utils/load-sprites'
 
 export const fightStage = (props) => {
-  const { target, myGroups, leader } = props
+  const { target, groups, leader } = props
   //DECORS --------------------
   //BG
   add([rect(width(), height()), pos(0, 0), color(83, 82, 140)])
@@ -34,13 +36,13 @@ export const fightStage = (props) => {
   ])
 
   stopButton.onClick(() => {
-    if (props.popularity < DEFAULT_POPULARITY)
-      props.popularity = DEFAULT_POPULARITY
+    if (props.popularity < gameInitialState.popularity)
+      props.popularity = gameInitialState.popularity
 
-    go('selectGroup', {
+    go(STAGES.selectGroups, {
       ...props,
-      myGroups: [],
-      generateCount: DEFAULT_GENERATE_COUNT,
+      groups: [],
+      generateCount: gameInitialState.generateCount,
     })
   })
 
@@ -56,19 +58,20 @@ export const fightStage = (props) => {
       const x = getRandomInt(width() - 100, width() - width() / 3)
 
       const foeSprite = add([
-        sprite('cop'),
+        sprite(SPRITES.cop),
         pos(x, Y - 3),
         origin('left', 'bottom'),
         area(),
         solid(),
         health(foeObj.force),
         { force: foeObj.force },
-        'character',
+        groupTags.person,
+        groupTags.orderForce,
       ])
 
       foeSprite.play('idle')
 
-      foeSprite.onCollide('group', (unitGroup) => {
+      foeSprite.onCollide(groupTags.group, (unitGroup) => {
         foeSprite.hurt(unitGroup.force)
         unitGroup.hurt(foeSprite.force)
         props.popularity += foeSprite.force
@@ -76,7 +79,7 @@ export const fightStage = (props) => {
     })
   })
 
-  myGroups.forEach((supporter) => {
+  groups.forEach((supporter) => {
     const bonus = supporter.accepts.reduce((acc, accept) => {
       const exist = leader.accepts.includes(accept)
       if (exist) acc += 0.5
@@ -98,7 +101,7 @@ export const fightStage = (props) => {
 
       const randSp = getRandomInt(0, 1)
       const supporterSprite = add([
-        sprite(randSp ? 'group' : 'group2'),
+        sprite(randSp ? SPRITES.group : SPRITES.group2),
         pos(x, Y - 3),
         origin('left', 'bottom'),
         area(),
@@ -106,8 +109,8 @@ export const fightStage = (props) => {
         body(),
 
         health(supporter.force),
-        'group',
-        'character',
+        groupTags.group,
+        groupTags.person,
         { force: supporter.force * muter },
       ])
 
@@ -120,9 +123,9 @@ export const fightStage = (props) => {
     })
   })
 
-  on('death', 'character', (e) => {
+  on('death', groupTags.person, (e) => {
     const explode = add([
-      sprite('explode'),
+      sprite(SPRITES.explode),
       pos(
         getRandomInt(e.pos.x - 5, e.pos.x + 5),
         getRandomInt(e.pos.y - 5, e.pos.y + 5)
@@ -135,17 +138,17 @@ export const fightStage = (props) => {
     destroy(e)
 
     wait(2, () => {
-      const numberOfSurvivor = get('group').length
+      const numberOfSurvivor = get(groupTags.group).length
 
       if (numberOfSurvivor <= 0) {
         props.popularity -= Math.round(props.popularity / 4)
-        if (props.popularity < DEFAULT_POPULARITY)
-          props.popularity = DEFAULT_POPULARITY
+        if (props.popularity < gameInitialState.popularity)
+          props.popularity = gameInitialState.popularity
 
-        go('selectGroup', {
+        go(STAGES.selectGroups, {
           ...props,
-          myGroups: [],
-          generateCount: DEFAULT_GENERATE_COUNT,
+          groups: [],
+          generateCount: gameInitialState.generateCount,
         })
       }
     })
@@ -158,23 +161,23 @@ export const fightStage = (props) => {
     area(),
   ])
 
-  objectif.onCollide('group', (unit) => {
+  objectif.onCollide(groupTags.group, (unit) => {
     const index = targets.findIndex((t) => t.name === target.name)
     if (index >= props.unlockTarget) {
       objectif.play('destruct')
       props.unlockTarget++
     }
 
-    if (props.popularity < DEFAULT_POPULARITY)
-      props.popularity = DEFAULT_POPULARITY
+    if (props.popularity < gameInitialState.popularity)
+      props.popularity = gameInitialState.popularity
 
     destroy(unit)
     wait(2, () => {
-      go('selectGroup', {
+      go(STAGES.selectGroups, {
         ...props,
         unlockTarget: props.unlockTarget,
-        myGroups: [],
-        generateCount: DEFAULT_GENERATE_COUNT,
+        groups: [],
+        generateCount: gameInitialState.generateCount,
       })
     })
   })

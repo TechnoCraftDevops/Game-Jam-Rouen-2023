@@ -1,7 +1,7 @@
-import { leaders } from '../figure/leaders'
+import { leaders } from '../figures/leaders'
 import { button } from '../utils/button'
-
-var x = 0
+import { STAGES } from '../../main'
+let x = 0
 
 export const selectLeaderStage = (props) => {
   //background
@@ -12,6 +12,7 @@ export const selectLeaderStage = (props) => {
     solid(),
     color(...leaders[x].color),
   ])
+
   // text
   add([
     text(`Choisis ton champion`, {
@@ -21,11 +22,14 @@ export const selectLeaderStage = (props) => {
     }),
     pos(35, 20),
   ])
+
   // back button
   button('<', 30, height() / 2, () => {
     x <= 0 ? (x = leaders.length - 1) : (x -= 1)
-    go('selectLeader', { ...props, leader: leaders[x] })
+    console.log(STAGES.selectLeader)
+    go(STAGES.selectLeader, { ...props, leader: leaders[x] })
   })
+
   // leader sprite
   const leader = add([
     sprite(leaders[x].sprite),
@@ -36,7 +40,7 @@ export const selectLeaderStage = (props) => {
   // forward button
   button('>', width() - 50, height() / 2, () => {
     x >= leaders.length - 1 ? (x = 0) : (x += 1)
-    go('selectLeader', { ...props, leader: leaders[x] })
+    go(STAGES.selectLeader, { ...props, leader: leaders[x] })
   })
   // leader name
   const leaderName = add([
@@ -60,7 +64,6 @@ export const selectLeaderStage = (props) => {
     ])
   })
 
-  // accept & reject
   leaders[x].rejects.forEach((reject, index) => {
     add([
       text('- ' + reject, {
@@ -70,9 +73,10 @@ export const selectLeaderStage = (props) => {
       pos(250, 250 + index * 20),
     ])
   })
+
   //ACTIONS
   const chooseLeader = () => {
-    go('selectGroup', { ...props, leader: leaders[x], myGroups: [] })
+    go(STAGES.selectGroups, { ...props, leader: leaders[x] })
   }
 
   leader.onClick(chooseLeader)

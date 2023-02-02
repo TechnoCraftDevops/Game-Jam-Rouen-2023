@@ -1,15 +1,24 @@
-/**
- * Sprites
- */
-loadSprite('bean', 'src/assets/bean.png')
-loadSprite('grass', 'src/assets/grass.png')
+export const SPRITES = {
+  lalanne: 'lalanne',
+  melanchon: 'melanchon',
+  zemmour: 'zemmour',
+  group_base: 'group_base',
+  batiment: 'batiment',
+  mairie: 'mairie',
+  prefecture: 'prefecture',
+  title: 'title',
+  explode: 'explode',
+  group: 'group',
+  group2: 'group2',
+  cop: 'cop',
+}
 
-loadSprite('lalanne', 'src/assets/lalanne.png')
-loadSprite('melanchon', 'src/assets/melanchon.png')
-loadSprite('zemmour', 'src/assets/zemmour.png')
-loadSprite('group_base', 'src/assets/group_base.png')
-loadSprite('batiment', 'src/assets/batiment.png')
-loadSprite('mairie', 'src/assets/mairie.png', {
+loadSprite(SPRITES.lalanne, '/assets/lalanne.png')
+loadSprite(SPRITES.melanchon, '/assets/melanchon.png')
+loadSprite(SPRITES.zemmour, '/assets/zemmour.png')
+loadSprite(SPRITES.group_base, '/assets/group_base.png')
+loadSprite(SPRITES.batiment, '/assets/batiment.png')
+loadSprite(SPRITES.mairie, '/assets/mairie.png', {
   sliceX: 6,
   anims: {
     destruct: {
@@ -20,7 +29,7 @@ loadSprite('mairie', 'src/assets/mairie.png', {
     },
   },
 })
-loadSprite('prefecture', 'src/assets/prefecture.png', {
+loadSprite(SPRITES.prefecture, '/assets/prefecture.png', {
   sliceX: 9,
   anims: {
     destruct: {
@@ -31,7 +40,7 @@ loadSprite('prefecture', 'src/assets/prefecture.png', {
     },
   },
 })
-loadSprite('title', 'src/assets/title.png', {
+loadSprite(SPRITES.title, '/assets/title.png', {
   sliceX: 8,
   anims: {
     idle: {
@@ -43,7 +52,7 @@ loadSprite('title', 'src/assets/title.png', {
   },
 })
 
-loadSprite('explode', 'src/assets/explode.png', {
+loadSprite(SPRITES.explode, '/assets/explode.png', {
   sliceX: 6,
   anims: {
     idle: {
@@ -55,7 +64,7 @@ loadSprite('explode', 'src/assets/explode.png', {
   },
 })
 
-loadSprite('group', 'src/assets/group.png', {
+loadSprite(SPRITES.group, '/assets/group.png', {
   sliceX: 3,
   anims: {
     run: {
@@ -67,7 +76,7 @@ loadSprite('group', 'src/assets/group.png', {
   },
 })
 
-loadSprite('group2', 'src/assets/group2.png', {
+loadSprite(SPRITES.group2, '/assets/group2.png', {
   sliceX: 3,
   anims: {
     run: {
@@ -79,7 +88,7 @@ loadSprite('group2', 'src/assets/group2.png', {
   },
 })
 
-loadSprite('cop', 'src/assets/cop.png', {
+loadSprite(SPRITES.cop, '/assets/cop.png', {
   sliceX: 12,
   anims: {
     idle: {
